@@ -1,5 +1,5 @@
 {
-  "name": "node-skeleton",
+  "name": "orderUp",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,7 +9,7 @@
     "local": "./node_modules/.bin/nodemon --ignore public/",
     "knex": "./node_modules/.bin/knex"
   },
-  "author": "Lighthouse Labs",
+  "author": "Andreas and Chelsea",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -23,7 +23,7 @@
     "pg": "^6.0.2"
   },
   "devDependencies": {
-    "nodemon": "^1.9.2",
-    "sqlite3": "^3.1.4"
+    "nodemon": "^1.9.2"
+
   }
 }
