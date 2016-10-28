@@ -13,6 +13,8 @@ const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
+const flash = require('connect-flash');
+const session = require('express-session');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -35,13 +37,53 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
+//initiate express-session
+app.use(session({
+  name: 'customerInfo',
+  secret: 'orderUpsecret'
+}));
+
+//initiate connect-flash
+app.use(flash());
+
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  if(req.session.user){
+    res.render("index");
+  }else{
+    res.redirect('/login')
+  }
 });
+
+//login page
+app.get("/login", (req, res) => {
+  let templateVars = {email: req.session["user"], message: req.flash('loginMessage')}
+  res.render("login" , templateVars) ;
+});
+
+function getUserPasswordHashandCompare(user,password){
+
+  dbHash = knex.select(password).form('users').where('name', user )
+
+}
+
+
+app.post("/login", (req, res) => {
+
+  //if(getUserAndpasswordHash(req.body.email,req.body.password))
+
+    if(users[url].email === req.body.email && (bcrypt.compareSync(req.body.password, users[url].password))){
+      console.log('correct pass');
+      req.session['user'] =  req.body.user;
+      res.redirect('/');
+    }
+      req.flash('loginMessage' , 'Email/password not valid' );
+      res.status(403);
+      res.redirect('/login')
+})
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

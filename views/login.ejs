@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<body>
+    <header> Login  </header>
+    <main>
+      <div class = "jumbotron" >
+        <p><%= message %>
+
+          <form action="/login" method="POST" style="margin:150px;">
+            <label for="email">email:</label>
+            <input id="email" type="email" name="email" placeholder="E-mail" style="width: 300px">
+            <input id="password" type="text" name="password" placeholder="Password" style="width: 300px">
+            <input type="submit" value="Submit">
+          <br>
+
+        </p>
+       </div>
+</body>
+</html>
