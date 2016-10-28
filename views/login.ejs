@@ -4,10 +4,32 @@
 
 </head>
 <body>
-    <header> Login  </header>
+<div class="container-fluid">
+    <div class="col-md-4">
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Menu
+      <span class="caret"></span>
+      </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <li><a href="#">Lunch</a></li>
+      <li><a href="#">Dinner</a></li>
+      <li><a href="#">Late Night</a></li>
+      <li><a href="#">Snacks</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a href="#">Separated link</a></li>
+    </ul>
+  </div>
+  <div class="col-md-4">Location</div>
+  <div class="col-md-4">Contact</div>
+  </div>
+  </div>
+    
+    <h1>Order Food</h1>
+    <h4> Login  </h4>
     <main>
       <div class = "jumbotron" >
-        <p><%= message %>
+        <!-- <p>message </p> -->
 
           <form action="/login" method="POST" style="margin:150px;">
             <label for="email">email:</label>
@@ -15,6 +37,9 @@
             <input id="password" type="text" name="password" placeholder="Password" style="width: 300px">
             <input type="submit" value="Submit">
           <br>
+  <footer>
+  <h2>Cart</h2>
+  </footer>
 
         </p>
        </div>
