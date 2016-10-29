@@ -41,6 +41,35 @@ app.use("/api/users", usersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
+  if(req.session.user){
+    res.render("index");
+  }else{
+    res.redirect('/login')
+  }
+});
+
+//login page
+app.get("/login", (req, res) => {
+  let templateVars = {user: req.session["user"], message: req.flash('loginMessage')}
+  res.render("login" , templateVars) ;
+});
+
+//logs the user in
+app.post("/login", (req, res) => {
+  if(getUserAndpasswordHash(req.body.user,req.body.password)){
+      console.log('correct pass');
+      req.session['user'] =  req.body.user;
+      res.redirect('/');
+  }else{
+      req.flash('loginMessage' , 'Email/password not valid' );
+      res.status(403);
+      res.redirect('/login')
+    }
+})
+
+app.get("/:restaurant", (req, res) => {
+  let templateVars = {email: req.session["user"], message: req.flash('loginMessage')}
+  res.render("menu" , templateVars) ;
 });
 
 app.get("/register", (req, res) => {
@@ -70,3 +99,15 @@ app.post("/menu/id:/create", (req, res) => {
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+
+//gets the users password from the usernaem they entered and compares the entered password to the hash
+function getUserPasswordHashandCompare(user,password){
+  let i=0;
+  dbHash = knex.select(password).form('users').where('name', user )
+  if(dbHash){
+    if(bcrypt.compareSync(password,dbHash)){
+      i = 1;
+    }
+  }
+  return i;
+}

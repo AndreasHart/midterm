@@ -1,27 +1,24 @@
-# Node Skeleton
+# Node Food Order App
 
-## Project Setup
+## Project Start-point
 
-1. Create your own empty repo on GitHub
-2. Clone this repository (do not fork)
-  - Suggestion: When cloning, specify a different folder name that is relevant to your project
-3. Remove the git remote: `git remotes rm origin`
-4. Add a remote for your origin: `git remote add origin <your github repo URL>`
-5. Push to the new origin: `git push -u origin master`
-6. Verify that the skeleton code now shows up in your repo on GitHub
+1. Figure out what "github" means
+2. Why should cloning be legal?: A history.
+3. And the 4th WRIT stated: Thou shalt have no other remote before me.
+4. And the 5th WRIT stated: Thou shalt create of a remote of me.
+5. Why are we pushing? How old are we?
+6. Something about skeletons because Halloween? 
 
 ## Getting Started
 
-1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
-2. Update the .env file with your correct local information
-3. Install dependencies: `npm i`
+1. Save the environment. Long live the bear of polar!
+2. Tattoo thineself with the bear of polar. 
+3. Take care of your dependencies, and one day, they will take care of you
 4. Fix to binaries for sass: `npm rebuild node-sass`
-5. Run migrations: `npm run knex migrate:latest`
-  - Check the migrations folder to see what gets created in the DB
-6. Run the seed: `npm run knex seed:run`
-  - Check the seeds file to see what gets seeded in the DB
-7. Run the server: `npm run local`
-8. Visit `http://localhost:8080/`
+5. Aid the polar bears in their migration. They shan't have a second one.
+6. Garden with Knex and prosper.
+7. Severs are marathons. You should never run them.
+8. Always visit your local host: they give you cupcakes on Wednesdays.
 
 ## Dependencies
 
