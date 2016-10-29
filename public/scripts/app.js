@@ -16,6 +16,9 @@ $(() => {
     for(item of menu) {
       $("<div>").text(item.).appendTo($("body"));
     }
-});
+  });
+
+}
+
 
 
