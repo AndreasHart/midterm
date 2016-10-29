@@ -1,0 +1,35 @@
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+}
+
+.btn-group {
+	margin: 0 auto;
+	font-size: 3em;
+	float: left;
+}
+
+h1 {
+	position: center;
+	font-size: 2em;
+}
+
+div {
+	margin: 1em;
+}
+
+.head-footer {
+	buttom: auto;
+	margin-top: 10em;
+	float: right;
+}

@@ -13,8 +13,6 @@ const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
-const flash = require('connect-flash');
-const session = require('express-session');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -37,20 +35,12 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
-//initiate express-session
-app.use(session({
-  name: 'customerInfo',
-  secret: 'orderUpsecret'
-}));
-
-//initiate connect-flash
-app.use(flash());
-
 // Mount all resource routes
 app.use("/api/users", usersRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
+  res.render("index");
   if(req.session.user){
     res.render("index");
   }else{
@@ -83,16 +73,28 @@ app.get("/:restaurant", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-	res.render("registration");
+  res.render("registration");
 });
 
 app.get("/login", (req, res) => {
-	res.render("login");
+  res.render("login");
 })
 
 app.get("/menu", (req, res) => {
-	res.render("menu");
+  res.render("menu");
 })
+
+app.get("/menu/id:/create", (req, res) => {
+  res.render("ownerMenu");
+})
+
+app.post("/register", (req, res) => {
+  res.redirect('/menu') //could redirect to cart?
+});
+
+app.post("/menu/id:/create", (req, res) => {
+  res.redirect('/menu') //add in ajax to dynamically adjust menu items
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

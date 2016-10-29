@@ -1,22 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<title>Login Page</title>
+ <!-- External Font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,700,700i" rel="stylesheet">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Scss style sheets -->
+    <link rel="stylesheet" href="/navbar.scss" type="text/scss" />
+
+<script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+<script type="text/javascript" src="/scripts/app.js"></script>
 
 </head>
 <body>
-    <header> Login  </header>
+      <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default"><a href="www.yellowpages.ca">Contact</a></button>
+        <button type="button" class="btn btn-default"><a href="www.halifax.ca">Location</a></button>
+
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Menu
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Lunch</a></li>
+            <li><a href="#">Dinner</a></li>
+            <li><a href="#">Late Night</a></li>
+            <li><a href="#">Snacks</a></li>
+          </ul>
+        </div>
+      </div>
+    <h1 class="Navbar">Order Food</h1>
+    <h4> Login  </h4>
     <main>
       <div class = "jumbotron" >
-        <p><%= message %>
+        <!-- <p>message </p> -->
 
           <form action="/login" method="POST" style="margin:150px;">
             <label for="email">email:</label>
             <input id="email" type="email" name="email" placeholder="E-mail" style="width: 300px">
-            <input id="password" type="text" name="password" placeholder="Password" style="width: 300px">
+            <input id="password" type="password" name="password" placeholder="Password" style="width: 300px">
             <input type="submit" value="Submit">
           <br>
+      <div>
+      <p>Don't have an account with us? <a href="/register">Sign up!</a></p>
+  <footer>
+  <h2>Cart</h2>
+  </footer>
 
-        </p>
-       </div>
 </body>
 </html>

@@ -1,18 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <title>Menu Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../styles/menu.css" type="text/css" />
 
 </head>
 <body>
-    <header> Menu  </header>
-    <main>
-      <div class = "jumbotron" >
-        <p><%= message %>
-        Menu item  X
+  <nav>
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default"><a href="www.yellowpages.ca">Contact</a></button>
+        <button type="button" class="btn btn-default"><a href="www.halifax.ca">Location</a></button>
 
-          <br>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Menu
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Lunch</a></li>
+            <li><a href="#">Dinner</a></li>
+            <li><a href="#">Late Night</a></li>
+            <li><a href="#">Snacks</a></li>
+          </ul>
+        </div>
+      </div>
+  </nav>
 
-        </p>
-       </div>
+<div class="jumbotron text-center">
+  <h1>Order Food Bar and Grill</h1>
+  <p>Delicious, made easy.</p>
+</div>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>Lunch</h3>
+      <p class="img">Image Placeholder<!--<img src="http://www.takestockmagazine.com/wp-content/uploads/2014/02/Whats-new-Gourmet-Hot-Dog-Rol1.jpg" />--></p>
+      <p>Join us for lunch! Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Dinner</h3>
+      <p>Our dinner options will bring you back. Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Late Night</h3>
+      <p>After the sunsets we tone it down with cool drinks and feisty apps. Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+      <div class="col-sm-4">
+      <h3>Snacks</h3>
+      <p class="img">Image Placeholder<!--<img src="http://www.takestockmagazine.com/wp-content/uploads/2014/02/Whats-new-Gourmet-Hot-Dog-Rol1.jpg" />--></p>
+      <p>Join us for lunch! Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Drinks</h3>
+      <p>Our dinner options will bring you back. Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+    <div class="col-sm-4">
+      <h3>Dessert</h3>
+      <p>After the sunsets we tone it down with cool drinks and feisty apps. Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...</p>
+    </div>
+<table class="tg">
+  <tr>
+    <td>
+    <p class="goku">Our Social media marketing team are so energetic and enthusiastic that we serves the best smo services in india. Our Facebook marketing team are very well trained to do marketing on facebook and twitter. We serves the best SMO service so we think that we are the best social media marketing company. We provide our online marketing serives in very affordable prize and our seo packages and smo packages are also very low....</p>
+    <div style="text-align:center;display:none" class="gaa"><script src="//code.jquery.com/jquery-1.10.2.js"></script><iframe src="http://saavn.com/" style="width:100%;height: 600px; border: none"></iframe></div></td>
+  </tr>
+  <tr><td><div>
+        <p class="goku">Our Social media marketing team are so energetic and enthusiastic that we serves the best smo services in india. Our Facebook marketing team are very well trained to do marketing on facebook and twitter. We serves the best SMO service so we think that we are the best social media marketing company. We provide our online marketing serives in very affordable prize and our seo packages and smo packages are also very low....<br><br></p>
+        <p class="goku">Our PPC Expert are so well trained that they maintain our ppc project in such a way that you will get CPC at very low cost. we manage our PPC in such a way that you will get each and every lead in very low cost.</p>
+</div></td></tr>
+</table>
+<script>$( ".goku" ).click(function() {
+  $( ".gaa" ).toggle( "slow" );
+});</script>
+  </div>
+</div>
+
 </body>
 </html>
