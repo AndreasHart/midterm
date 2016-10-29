@@ -15,8 +15,8 @@ const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
 // Seperated Routes for each Resource
-const usersRoutes = require("./routes/users");
-
+const restaurantRoutes = require("./routes/users");
+const registerRoutes = require("./routes/register");
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -36,8 +36,9 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Mount all resource routes
-app.use("/api/users", usersRoutes(knex));
 
+app.use("/api/restaurant", restaurantRoutes(knex));
+app.use("api/register",registerRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
@@ -57,20 +58,20 @@ app.get("/login", (req, res) => {
 //logs the user in
 app.post("/login", (req, res) => {
   if(getUserAndpasswordHash(req.body.user,req.body.password)){
-      console.log('correct pass');
-      req.session['user'] =  req.body.user;
-      res.redirect('/');
+    console.log('correct pass');
+    req.session['user'] =  req.body.user;
+    res.redirect('/');
   }else{
-      req.flash('loginMessage' , 'Email/password not valid' );
-      res.status(403);
-      res.redirect('/login')
-    }
+    req.flash('loginMessage' , 'Email/password not valid' );
+    res.status(403);
+    res.redirect('/login')
+  }
 })
 
-app.get("/:restaurant", (req, res) => {
-  let templateVars = {email: req.session["user"], message: req.flash('loginMessage')}
+/*app.get("/:restaurant", (req, res) => {
+  let templateVars = {user: req.session["user"], message: req.flash('loginMessage')}
   res.render("menu" , templateVars) ;
-});
+});*/
 
 app.get("/register", (req, res) => {
   res.render("registration");
@@ -103,11 +104,9 @@ app.listen(PORT, () => {
 //gets the users password from the usernaem they entered and compares the entered password to the hash
 function getUserPasswordHashandCompare(user,password){
   let i=0;
-  dbHash = knex.select(password).form('users').where('name', user )
-  if(dbHash){
-    if(bcrypt.compareSync(password,dbHash)){
-      i = 1;
-    }
+  dbHash = knex.select('password').from('users').where('name', user ).then(user=> users[0].password)
+  if(dbHash && bcrypt.compareSync(password,dbHash)){
+    return true
   }
-  return i;
+  return false;
 }
