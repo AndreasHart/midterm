@@ -12,7 +12,7 @@ module.exports = (knex) => {
      'name':name,
      'phoneNumber':phonenumber,
      'address': address,
-     'glutenFree':gf
+     'glutenFree':gf,
      'dairyFree':df,
      'vegetarian':veg,
      'vegan':vegan,

@@ -10,7 +10,7 @@ $(() => {
   });
   $.ajax({
     method: "GET",
-    url: "/api/menu"
+    url: "/api/restaurant/:resId"
   }).done((menu) => {
     console.log(restaurants);
     for(item of menu) {

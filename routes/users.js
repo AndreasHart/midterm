@@ -8,41 +8,32 @@ module.exports = (knex) => {
   router.get("/", (req, res) => {
     knex
       .select("*")
-      .from("restaurants")
+      .from("users")
       .then((results) => {
         res.json(results);
     });
   });
 
-  router.get("/:resId", (req, res) => {
+  router.get("/:userId", (req, res) => {
     knex
       .select("*")
-      .from("restaurants")
-      .where('id', req.params.resId)
+      .from("users")
+      .where('id', req.params.userId)
       .then((results) => {
         res.json(results);
     });
   });
 
-  router.get("/:resId/orders", (req, res) => {
+  router.get("/:userId/orders", (req, res) => {
     knex
       .select("*")
       .from("orders")
-      .where('restaurantId', req.params.resId)
+      .where(userId : req.params.userId)
       .then((results) => {
         res.json(results);
     });
-  });
 
-  router.get("/:resId/menuitems", (req, res) => {
-    knex
-      .select("*")
-      .from("menu_items")
-      .where('restaurantId' ,req.params.resId)
-      .then((results) => {
-        res.json(results);
-    });
-  });
+
 
   return router;
-};
+}
