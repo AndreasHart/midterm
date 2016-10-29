@@ -6,3 +6,7 @@
   width: 50px;
   height: 30px;
 }
+
+h3:hover > ul.dropdown-menu {
+  display: block;
+}

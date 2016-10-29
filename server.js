@@ -50,8 +50,8 @@ app.get("/", (req, res) => {
 
 //login page
 app.get("/login", (req, res) => {
-  let templateVars = {user: req.session["user"], message: req.flash('loginMessage')}
-  res.render("login" , templateVars) ;
+  //let templateVars = {user: req.session["user"], message: req.flash('loginMessage')}
+  res.render("login"); //templateVars) ;
 });
 
 //logs the user in
@@ -77,7 +77,7 @@ app.get("/register", (req, res) => {
   let templateVars = {userInfo: req.params.id,
     email: req.session["email"], 
     message: req.flash('loginMessage')};
-  res.render("registration", templateVars);
+  res.render("/registration", templateVars);
 });
 
 app.post("/register", (req, res) => {
