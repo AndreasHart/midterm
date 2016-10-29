@@ -57,39 +57,62 @@ app.get("/login", (req, res) => {
 //logs the user in
 app.post("/login", (req, res) => {
   if(getUserAndpasswordHash(req.body.user,req.body.password)){
-      console.log('correct pass');
-      req.session['user'] =  req.body.user;
-      res.redirect('/');
+    console.log('correct pass');
+    req.session['user'] =  req.body.user;
+    res.redirect('/');
   }else{
-      req.flash('loginMessage' , 'Email/password not valid' );
-      res.status(403);
-      res.redirect('/login')
-    }
+    req.flash('loginMessage' , 'Email/password not valid' );
+    res.status(403);
+    res.redirect('/login')
+  }
 })
 
 app.get("/:restaurant", (req, res) => {
-  let templateVars = {email: req.session["user"], message: req.flash('loginMessage')}
-  res.render("menu" , templateVars) ;
+  //let templateVars = {email: req.session["user"], message: req.flash('loginMessage')}
+  res.render("menu");
+  //res.render("menu" , templateVars) ;
 });
 
 app.get("/register", (req, res) => {
-  res.render("registration");
+  let templateVars = {userInfo: req.params.id,
+    email: req.session["email"], 
+    message: req.flash('loginMessage')};
+  res.render("registration", templateVars);
 });
+
+app.post("/register", (req, res) => {
+  let i = 0;
+  for (let user in users) {
+    if(users[user].email === req.body.email) {i = 1;}
+  }
+  if(i === 0) {
+    let userInfo = usersdata();
+    let userDataObj = {'id': 1, 'email': req.body.email,
+      'password': bcrypt.hashSync(req.body.password, 10) };
+      users[userInfo] = userDataObj;
+      let templateVars = {userInfo: userDataObj,
+        email: req.session["email"], 
+        message: req.flash('loginMessage')};
+        console.log(users);
+        res.redirect('/menu');     //should this redirect to cart?
+      } else {
+        res.status(403);
+        req.flash('loginMessage', 'Email already registered!');
+        res.redirect('/register');
+      }
+});
+
 
 app.get("/login", (req, res) => {
   res.render("login");
-})
+});
 
 app.get("/menu", (req, res) => {
   res.render("menu");
-})
+});
 
 app.get("/menu/id:/create", (req, res) => {
   res.render("ownerMenu");
-})
-
-app.post("/register", (req, res) => {
-  res.redirect('/menu') //could redirect to cart?
 });
 
 app.post("/menu/id:/create", (req, res) => {
