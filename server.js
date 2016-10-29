@@ -59,6 +59,14 @@ app.get("/menu/id:/create", (req, res) => {
   res.render("ownerMenu");
 })
 
+app.post("/register", (req, res) => {
+  res.redirect('/menu') //could redirect to cart?
+});
+
+app.post("/menu/id:/create", (req, res) => {
+  res.redirect('/menu') //add in ajax to dynamically adjust menu items
+});
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
