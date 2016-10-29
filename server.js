@@ -53,8 +53,8 @@ app.get("/", (req, res) => {
 
 //login page
 app.get("/login", (req, res) => {
-  let templateVars = {user: req.session["user"], message: req.flash('loginMessage')}
-  res.render("login" , templateVars) ;
+  //let templateVars = {user: req.session["user"], message: req.flash('loginMessage')}
+  res.render("login"); //templateVars) ;
 });
 
 //logs the user in
@@ -70,29 +70,54 @@ app.post("/login", (req, res) => {
   }
 })
 
-/*app.get("/:restaurant", (req, res) => {
-  let templateVars = {user: req.session["user"], message: req.flash('loginMessage')}
-  res.render("menu" , templateVars) ;
-});*/
+
+app.get("/:restaurant", (req, res) => {
+  //let templateVars = {email: req.session["user"], message: req.flash('loginMessage')}
+  res.render("menu");
+  //res.render("menu" , templateVars) ;
+});
+
 
 app.get("/register", (req, res) => {
-  res.render("registration");
+  let templateVars = {userInfo: req.params.id,
+    email: req.session["email"],
+    message: req.flash('loginMessage')};
+  res.render("/registration", templateVars);
 });
+
+app.post("/register", (req, res) => {
+  let i = 0;
+  for (let user in users) {
+    if(users[user].email === req.body.email) {i = 1;}
+  }
+  if(i === 0) {
+    let userInfo = usersdata();
+    let userDataObj = {'id': 1, 'email': req.body.email,
+      'password': bcrypt.hashSync(req.body.password, 10) };
+      users[userInfo] = userDataObj;
+      let templateVars = {userInfo: userDataObj,
+        email: req.session["email"],
+        message: req.flash('loginMessage')};
+        console.log(users);
+        res.redirect('/menu');     //should this redirect to cart?
+      } else {
+        res.status(403);
+        req.flash('loginMessage', 'Email already registered!');
+        res.redirect('/register');
+      }
+});
+
 
 app.get("/login", (req, res) => {
   res.render("login");
-})
+});
 
 app.get("/menu", (req, res) => {
   res.render("menu");
-})
+});
 
 app.get("/menu/id:/create", (req, res) => {
   res.render("ownerMenu");
-})
-
-app.post("/register", (req, res) => {
-  res.redirect('/menu') //could redirect to cart?
 });
 
 app.post("/menu/id:/create", (req, res) => {
