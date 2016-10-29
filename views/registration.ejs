@@ -24,9 +24,10 @@
 </head>
     <body>
     <nav>
-      <div class="btn-group" role="group" aria-label="...">
+    <div class="btn-group" role="group" aria-label="...">
         <button type="button" class="btn btn-default"><a href="www.yellowpages.ca">Contact</a></button>
         <button type="button" class="btn btn-default"><a href="www.halifax.ca">Location</a></button>
+        <button type="button" class="btn btn-default"><a href="/Login">Login</a></button>
 
         <div class="btn-group" role="group">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,14 +42,17 @@
           </ul>
         </div>
       </div>
-    <h1 class="Navbar">Order Food Bar and Grill</h1>
-    </nav>
+  </nav>
+    <div>
+        <h1 class="Navbar">Order Food Bar and Grill</h1>
+    </div>
     <div class="container">
         <div class="row centered-form">
         <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                        <h3 class="panel-title">Sign up for Order Food Bar and Grill <small>Delicious, made easy.</small></h3>
+                        <h3 class="panel-title"><p>Sign up for Order Food Bar and Grill</p> 
+                        <small>Delicious, made easy.</small></h3>
                         </div>
                         <div class="panel-body">
                         <form role="form">
@@ -80,6 +84,7 @@
                                         <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
                                     </div>
                                 </div>
+                            </div>
 
                             <div class="form-group">
                                 <input type="address" name="address" id="address" class="form-control input-sm" placeholder="Street, City, Postal Code">
@@ -88,25 +93,35 @@
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
-                                        <input type="text" name="cellphone" id="phonenumber" class="form-control input-sm" placeholder="Cellphone">
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <div class="form-group">
                                         <span class="input-group-addon">
                                         <input type="checkbox" input id="glutenFree" aria-label="..."> Gluten Free
                                         </span>
                                     </div>
                                 </div>
-
-                            <div class="form-group">
-                                <input type="text" name="allergies" id="alleries" class="form-control input-sm" placeholder="Allergy information">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <span class="input-group-addon">
+                                        <input type="checkbox" input id="dairyFree" aria-label="..."> Dairy Free
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <input type="text" name="foodPref" id="foodPref" class="form-control input-sm" placeholder="Dietary preferences">
-                            </div>
-
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <span class="input-group-addon">
+                                        <input type="checkbox" input id="vegetarian" aria-label="..."> Vegetarian
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        <span class="input-group-addon">
+                                        <input type="checkbox" input id="vegan" aria-label="..."> Vegan
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                             
                             <input type="submit" value="Register" class="btn btn-info btn-block">
