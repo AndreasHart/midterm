@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/navbar.css" type="text/css" />
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -24,10 +25,41 @@
     
   </head>
 
-  <h3>Choose Your Eats</h3>
-    <a href="/menu"><ol>Order Food Restaurant and Grill</ol></a>
   <body>
 
-    <h1>Order Food</h1>
+  <div class="nav">
+  <nav>
+    <div class="btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default"><a href="www.yellowpages.ca">Contact</a></button>
+        <button type="button" class="btn btn-default"><a href="www.halifax.ca">Location</a></button>
+        <button type="button" class="btn btn-default"><a href="/Login">Login</a></button>
+
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Menu
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">Lunch</a></li>
+            <li><a href="#">Dinner</a></li>
+            <li><a href="#">Late Night</a></li>
+            <li><a href="#">Snacks</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="jumbotron text-center">
+        <h1>Order Food Bar and Grill</h1>
+          <p>Delicious, made easy.</p>
+    </div>
+  </nav>
+</div>
+
+  <section>
+  <h3>Choose Your Eats</h3>
+    <section class="restaurantList">
+    <ul>
+    <a href="/menu"><ol>Burrito</ol></a>
+  </section>
+
   </body>
 </html>
