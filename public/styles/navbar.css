@@ -1,0 +1,39 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font: 100% Helvetica, sans-serif;
+  color: #333;
+}
+
+.btn-group {
+  margin: 0 auto;
+  font-size: 3em;
+  float: left;
+}
+
+h1 {
+  position: center;
+  font-size: 2em;
+}
+
+div {
+  margin: 1em;
+}
+
+.head-footer {
+  buttom: auto;
+  margin-top: 10em;
+  float: right;
+}
+
+.nav {
+  background-color: lightgrey;
+  color: black;
+  margin-right: -2em;
+}

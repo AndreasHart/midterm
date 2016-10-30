@@ -19,32 +19,60 @@ $(document).ready(function () {
 		$('.lunch-food-description').hide();
 	});
 
-$(() => {
-  $.ajax({
-    method: "GET",
-    url: "/api/restaurants"
-  }).done((restaurants) => {
-    console.log(restaurants);
-    for(res of restaurants) {
-      $("<div>").text(res.restaurant_name).appendTo($("body"));
-    }
-  });
-  $.ajax({
-    method: "GET",
-    url: "/api/restaurants/:resId"
-  }).done((menu) => {
-    console.log(restaurants);
-    for(item of menu) {
-      $("<div>").text(item.).appendTo($("body"));
-    }
-  });
+// $(() => {
+//   $.ajax({
+//     method: "GET",
+//     url: "/api/restaurants"
+//   }).done((restaurants) => {
+//     console.log(restaurants);
+//     for(res of restaurants) {
+//       $("<div>").text(res.restaurant_name).appendTo($("body"));
+//     }
+//   });
+//   $.ajax({
+//     method: "GET",
+//     url: "/api/restaurants/:resId"
+//   }).done((menu) => {
+//     console.log(restaurants);
+//     for(item of menu) {
+//       $("<div>").text(item.).appendTo($("body"));
+//     }
+//   });
 
-}
+// }
 
 	var createRestElem = (loadRestaurants) => {
-		var $restaurant = ``;
+		var $restaurant = `<article>
+			<h3>${loadRestaurants.restaurant.name}</h3>
+			<h4>${loadRestaurants.restaurant.menuitems}</h4>
+		</article>`;
 		return $restaurant;
 	}
+
+	function renderRestaurants (restList) {
+		$('.restaurantList').empty();
+		var sortRestos = restList.sort(function (a, b) {
+			a.restaurantId < b.restaurantId;
+		});
+		sortRestos.forEach(function (resto) {
+			$('.restaurantList').append(createRestElem(resto));
+		});
+	}
+
+	var loadRestaurants = function ($inputResto) {
+		$.ajax({
+			url: '/api/restaurants/',
+			dataType: "json",
+			success: function(result) {
+				renderRestaurants(result);
+			}, failure: function() {
+				throw err
+				console.log("Restaurants melted", err)
+			}
+		});
+	}
+
+	loadRestaurants();
 
 
 	// $(() => {
