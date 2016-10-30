@@ -53,6 +53,16 @@ function renderRestaurants (restList) {
         $('.restaurantList').append(createRestElem(resName, resdescription));
       }
     }
+    function renderMenu (menuList) {
+
+
+      for(item of menuList) {
+        itemId=item.id;
+        menuItem = item.dishName;
+        ItemDescription = item.description;
+        $(.).append(createRestElem(resName, resdescription));
+      }
+    }
 
     var loadRestaurants = function ($inputResto) {
       $.ajax({
