@@ -103,7 +103,24 @@ $('c3098998-5f8e-4947-967f-cb83bc8391be').click((resid)=>{
       //     throw err
       console.log("Restaurants melted", err)
     }
-    //   });
+
+
+    function renderMenu (menuList) {
+    	$('h5').empty();
+      for(item of menuList) {
+        itemId=item.id;
+        menuItem = item.dishName;
+        ItemDescription = item.description;
+        $('h5').append(createRestElem(resName, resdescription));
+      }
+    }
+
+    $('col-xs-12').click(()=>{
+      $.ajax({
+       url: '/api/restaurants/:resid/menuitems',
+       dataType: "json",
+       success: (result)=> {
+        renderMenuitems(result);
 
     // });
 
