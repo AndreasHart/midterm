@@ -13,8 +13,9 @@ const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
-const uuid        = require('node-uuid')
-const flash       = require('connect-flash')
+const uuid        = require('node-uuid');
+const flash       = require('connect-flash');
+const cookieSession=require('cookie-session');
 // Seperated Routes for each Resource
 const restaurantRoutes = require("./routes/restaurants");
 const usersRoutes = require("./routes/users");
@@ -23,7 +24,10 @@ const ordersRoutes = require ("./routes/orders");
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
-
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
@@ -44,7 +48,7 @@ app.use("/api/users",usersRoutes(knex));
 app.use("/api/orders", ordersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+
   if(req.session.user){
     res.render("index");
   }else{
@@ -60,9 +64,10 @@ app.get("/login", (req, res) => {
 
 //logs the user in
 app.post("/login", (req, res) => {
-  if(getUserAndpasswordHash(req.body.user,req.body.password)){
-    console.log('correct pass');
-    req.session['user'] =  req.body.user;
+
+  if(getUserPasswordHashandCompare(req.body.name,req.body.password)){
+
+    req.session['user'] =  req.body.name;
     res.redirect('/');
   }else{
     req.flash('loginMessage' , 'Email/password not valid' );
@@ -131,31 +136,31 @@ app.listen(PORT, () => {
 
 //gets the users password from the usernaem they entered and compares the entered password to the hash
 function getUserPasswordHashandCompare(user,password){
-
-  dbHash = knex
+  console.log(user,password);
+  return knex
   .select('password')
   .from('users')
   .where('name', user )
-  .then(user => users[0].password)
-  if(dbHash && bcrypt.compareSync(password,dbHash)){
-    return true
-  }
-  return false;
-}
-
-function checkIfUsernameExists(name){
-
-  return knex
-  .select('name')
-  .from('users')
-  .where('name', name)
-  .then((users)=>{
-
-    if(users.length > 0) {
-      return true;
-    } else {
-      return false;
+  .then((users) => {
+    if(bcrypt.compareSync(password,users[0].password)){
+      return true
     }
-  })
+    return false;
+  })}
 
-}
+  function checkIfUsernameExists(name){
+
+    return knex
+    .select('name')
+    .from('users')
+    .where('name', name)
+    .then((users)=>{
+
+      if(users.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    })
+
+  }
