@@ -2,6 +2,7 @@
 
 $(document).ready(function () {
 
+
 // $(() => {
 //   $.ajax({
 //     method: "GET",
@@ -54,56 +55,54 @@ var createMenuElem = (loadMenuItems) => {
 
 function renderRestaurants (restList) {
   $('.restaurantList').empty();
-		// var sortRestos = restList.sort(function (a, b) {
-		// 	a.restaurantId < b.restaurantId;
-		// });
-		// sortRestos.forEach(function (resto) {
-			for(res of restList) {
-        resId=res.id;
-        resName = res.restaurant_name;
-        resdescription = res.description;
-        $('.restaurantList').append(createRestElem(resName, resdescription));
-      }
-    }
-    function renderMenuitems (menuList) {
+  for(res of restList) {
+    resId=res.id;
+    resName = res.restaurant_name;
+    resdescription = res.description;
+    $('.restaurantList').append(createRestElem(resName, resdescription));
+  }
+}
+function renderMenuitems (menuList) {
 
 
-      for(item of menuList) {
-        itemId=item.id;
-        menuItem = item.dishName;
-        ItemDescription = item.description;
-        $(.${itemId}).append(createMenuElem(MenuName, Itemdescription));
-      }
-    }
+  for(item of menuList) {
+    itemId=item.id;
+    menuItem = item.dishName;
+    ItemDescription = item.description;
+    $(.${itemId}).append(createMenuElem(MenuName, Itemdescription));
+  }
+}
 
-    var loadRestaurants = function ($inputResto) {
-      $.ajax({
-       url: '/api/restaurants/',
-       dataType: "json",
-       success: (result)=> {
-        renderRestaurants(result);
 
-      }, failure: ()=> {
-        throw err
-        console.log("Restaurants melted", err)
-      }
-    });
+var loadRestaurants = function ($inputResto) {
+  $.ajax({
+   url: '/api/restaurants/',
+   dataType: "json",
+   success: (result)=> {
+    renderRestaurants(result);
 
-    }
+  }, failure: ()=> {
+    throw err
+    console.log("Restaurants melted", err)
+  }
+});
 
-    loadRestaurants();
+}
 
-    $('c3098998-5f8e-4947-967f-cb83bc8391be').click((resid)=>{
+loadRestaurants();
+
+$('c3098998-5f8e-4947-967f-cb83bc8391be').click((resid)=>{
       // $.ajax({
       //   url: '/api/restaurants/${this}/menuitems',
       //   dataType: "json",
       //   success: (result)=> {
       //     renderMenuitems(result);
 
+
       //   }, failure: ()=> {
       //     throw err
-          console.log("Restaurants melted", err)
-        }
+      console.log("Restaurants melted", err)
+    }
     //   });
 
     // });
@@ -125,19 +124,42 @@ function renderRestaurants (restList) {
       $('h4').hide();
     });
 
+    var menuItem;
+    var orderArray = [];
 
-	// $(() => {
-	//   $.ajax({
-	//     method: "GET",
-	//     url: "/api/users"
-	//   }).done((users) => {
-	//     for(user of users) {
-	//       $("<div>").text(user.name).appendTo($("body"));
-	//     }
-	//   });
+    var createOrderArray = function () {
+      $('.menuItem').on("click", function () {
+       orderArray.push(menuItem);
+     })
+      $('.itemSubmit').on("click", function () {
+       order.Array.push(menuItem);
+     })
+    }
 
-	// });
+    $('.col-xs-12').mouseenter(function () {
+     $(this).css("background-color", "darkseagreen");
+   });
 
-	//App should be able to populate
+    $('.col-xs-12').mouseleave(function () {
+      $(this).css("background-color", "lightseagreen");
+    });
 
-});
+    $('.lunch-food-description').hide();
+    $('.lunch').mouseenter(function () {
+      $('.lunch-food-description').slideToggle();
+    });
+
+    $('.lunch-article').mouseleave(function () {
+      $('.lunch-food-description').hide();
+    });
+
+    function modify_qty(val) {
+      var qty = document.getElementById('qty').value;
+      var new_qty = parseInt(qty,10) + val;
+
+      if (new_qty < 0) {
+        new_qty = 0;
+
+      }
+    }
+  });
