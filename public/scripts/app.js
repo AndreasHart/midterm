@@ -34,6 +34,9 @@ $(document).ready(function () {
 			</section>
 			<article class="lunch-food-description">
 			<h4>${resdescription}</h4>
+			<h5><span class="input-group-addon">
+        <input type="checkbox" aria-label="...">
+      </span>${menuItem}<h5>
 			</article>
 		</article>`;
 		return $restaurant;
@@ -42,13 +45,10 @@ $(document).ready(function () {
 
 	function renderRestaurants (restList) {
 		$('.restaurantList').empty();
-		// var sortRestos = restList.sort(function (a, b) {
-		// 	a.restaurantId < b.restaurantId;
-		// });
-		// sortRestos.forEach(function (resto) {
 			for(res of restList) {
 				resName = res.restaurant_name;
 				resdescription = res.description;
+				menuItem = res.menuItemId;
 			$('.restaurantList').append(createRestElem(resName, resdescription));
 		}
 	}
@@ -68,6 +68,15 @@ $(document).ready(function () {
 
 	loadRestaurants();
 
+	var menuItem;
+	var orderArray = [];
+
+	var createOrderArray = function () {
+		$('.menuItem').on("click", function () {
+			orderArray.push(menuItem);
+		})
+	}
+
 		$('.col-xs-12').mouseenter(function () {
 		$(this).css("background-color", "darkseagreen");
 	});
@@ -85,6 +94,17 @@ $(document).ready(function () {
 		$('h4').hide();
 	});
 
+	function modify_qty(val) {
+    var qty = document.getElementById('qty').value;
+    var new_qty = parseInt(qty,10) + val;
+    
+    if (new_qty < 0) {
+        new_qty = 0;
+    }
+    
+    document.getElementById('qty').value = new_qty;
+    return new_qty;
+	}
 
 	// $(() => {
 	//   $.ajax({

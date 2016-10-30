@@ -24,8 +24,8 @@
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="../styles/navbar.css" type="text/css" />
-    <link rel="stylesheet" href="../styles/index.css" type="text/css"
-
+    <link rel="stylesheet" href="../styles/index.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/counter.css" type="text/css" />
     
 
   
@@ -60,7 +60,11 @@
           <p>Delicious, made easy.</p>
     </div>
     <section>
-      <span class="cart">Ready to Eat?</span>
+      <div class="box">    
+        <input id="qty" value="0" />
+      </div>
+      <span class="cart">Ready to Eat?
+      </span>
     </section>
   </nav>
 </div>
@@ -74,6 +78,9 @@
       </section>
       <article class="lunch-food-description">
       <h4></h4>
+      <h5><span class="input-group-addon">
+        <input type="checkbox" aria-label="...">
+      </span><h5>
       </article>
     </article>`
   </section>
