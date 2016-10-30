@@ -2,28 +2,6 @@
 
 $(document).ready(function () {
 
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/restaurants"
-//   }).done((restaurants) => {
-//     console.log(restaurants);
-//     for(res of restaurants) {
-//       $("<div>").text(res.restaurant_name).appendTo($("body"));
-//     }
-//   });
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/restaurants/:resId"
-//   }).done((menu) => {
-//     console.log(restaurants);
-//     for(item of menu) {
-//       $("<div>").text(item.).appendTo($("body"));
-//     }
-//   });
-
-// }
-
 	var resName;
 	var resdescription;
 
@@ -34,9 +12,12 @@ $(document).ready(function () {
 			</section>
 			<article class="lunch-food-description">
 			<h4>${resdescription}</h4>
-			<h5><span class="input-group-addon">
-        <input type="checkbox" aria-label="...">
-      </span>${menuItem}<h5>
+			<h5>${menuItem}<div class="menu-box">    
+        <label for="qty"><abbr title="Quantity">Qty</abbr></label>
+        <input id="qty-menu" value="0" />
+        <button id="down" onclick="modify_qty(-1)">-1</button>
+        <button id="up" onclick="modify_qty(1)">+1</button>
+    </div></h5>
 			</article>
 		</article>`;
 		return $restaurant;
@@ -74,6 +55,9 @@ $(document).ready(function () {
 	var createOrderArray = function () {
 		$('.menuItem').on("click", function () {
 			orderArray.push(menuItem);
+		})
+		$('.itemSubmit').on("click", function () {
+			order.Array.push(menuItem);
 		})
 	}
 
