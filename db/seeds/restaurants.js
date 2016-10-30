@@ -11,8 +11,8 @@ exports.seed = function(knex, Promise) {
   .then(function () {
     return Promise.all([
       knex('restaurants').insert({id: bwid, restaurant_name: 'burritoworld'}),
-      knex('restaurants').insert({id: uuid.v4(), restaurant_name: 'tacoheaven'}),
-      knex('restaurants').insert({id: uuid.v4(), restaurant_name: 'eadables'})
+      knex('restaurants').insert({id: thid, restaurant_name: 'tacoheaven'}),
+      knex('restaurants').insert({id: edid, restaurant_name: 'eadables'})
       ]);
   })
   .then(function() {
