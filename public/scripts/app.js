@@ -24,16 +24,6 @@ $(document).ready(function () {
 		console.log(loadRestaurants, "So many foods")
 	}
 
-	function renderRestaurants (restList) {
-		$('.restaurantList').empty();
-			for(res of restList) {
-				resName = res.restaurant_name;
-				resdescription = res.description;
-				menuItem = res.menuItemId;
-			$('.restaurantList').append(createRestElem(resName, resdescription));
-		}
-	}
-
 	var loadRestaurants = function ($inputResto) {
 		$.ajax({
 			url: '/api/restaurants/',
@@ -49,7 +39,49 @@ $(document).ready(function () {
 
 	loadRestaurants();
 
-	var menuItem;
+function renderRestaurants (restList) {
+  $('.restaurantList').empty();
+			for(res of restList) {
+        resId=res.id;
+        resName = res.restaurant_name;
+        resdescription = res.description;
+        $('.restaurantList').append(createRestElem(resName, resdescription));
+      }
+    }
+
+    $('col-xs-12').click(()=>{
+      $.ajax({
+       url: '/api/restaurants/:resid/menuitems',
+       dataType: "json",
+       success: (result)=> {
+        renderMenuitems(result);
+
+      }, failure: ()=> {
+        throw err
+        console.log("Restaurants melted", err)
+      }
+    });
+
+    });
+
+    // $('.col-xs-12').mouseenter(function () {
+    //   $(this).css("background-color", "darkseagreen");
+    // });
+
+    // $('.col-xs-12').mouseleave(function () {
+    //   $(this).css("background-color", "lightseagreen");
+    // });
+
+    $('h4').hide();
+    $('.lunch').mouseenter(function () {
+      $('h4').slideToggle();
+    });
+
+    $('.lunch-article').mouseleave(function () {
+      $('h4').hide();
+    });
+
+    	var menuItem;
 	var orderArray = [];
 
 	var createOrderArray = function () {
@@ -84,24 +116,5 @@ $(document).ready(function () {
     
     if (new_qty < 0) {
         new_qty = 0;
-    }
-    
-    document.getElementById('qty').value = new_qty;
-    return new_qty;
-	}
 
-	// $(() => {
-	//   $.ajax({
-	//     method: "GET",
-	//     url: "/api/users"
-	//   }).done((users) => {
-	//     for(user of users) {
-	//       $("<div>").text(user.name).appendTo($("body"));
-	//     }
-	//   });
-
-	// });
-
-	//App should be able to populate 
-
-});
+}
