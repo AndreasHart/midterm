@@ -77,21 +77,21 @@ $(document).ready(function () {
 		})
 	}
 
-		$('.col-xs-12').mouseenter(function () {
-		$(this).css("background-color", "darkseagreen");
+	$('.col-xs-12').mouseenter(function () {
+	$(this).css("background-color", "darkseagreen");
 	});
 
 	$('.col-xs-12').mouseleave(function () {
 		$(this).css("background-color", "lightseagreen");
 	});
 
-	$('h4').hide();
+	$('.lunch-food-description').hide();
 	$('.lunch').mouseenter(function () {
-		$('h4').slideToggle();
+		$('.lunch-food-description').slideToggle();
 	});
 
 	$('.lunch-article').mouseleave(function () {
-		$('h4').hide();
+		$('.lunch-food-description').hide();
 	});
 
 	function modify_qty(val) {
