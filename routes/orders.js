@@ -8,32 +8,31 @@ module.exports = (knex) => {
   router.get("/", (req, res) => {
     knex
       .select("*")
-      .from("users")
+      .from("orders")
       .then((results) => {
         res.json(results);
     });
   });
 
-  router.get("/:userId", (req, res) => {
-    knex
-      .select("*")
-      .from("users")
-      .where('id', req.params.userId)
-      .then((results) => {
-        res.json(results);
-    });
-  });
-
-  router.get("/:userId/orders", (req, res) => {
+  router.get("/:orderid", (req, res) => {
     knex
       .select("*")
       .from("orders")
-      .where(userId : req.params.userId)
+      .where('id', req.params.orderId)
       .then((results) => {
         res.json(results);
     });
+  });
 
-
+  router.get("/:orderId/order_item", (req, res) => {
+    knex
+      .select("*")
+      .from("order_item")
+      .where('orderId', req.params.orderId)
+      .then((results) => {
+        res.json(results);
+    });
+  });
 
   return router;
 }

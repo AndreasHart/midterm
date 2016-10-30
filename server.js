@@ -15,8 +15,9 @@ const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
 
 // Seperated Routes for each Resource
-const usersRoutes = require("./routes/users");
-
+const restaurantRoutes = require("./routes/restaurants");
+const registerRoutes = require("./routes/register");
+const ordersRoutes = require ("./routes/orders");
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -36,8 +37,10 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Mount all resource routes
-app.use("/api/users", usersRoutes(knex));
 
+app.use("/api/restaurants", restaurantRoutes(knex));
+//app.use("/api/register",registerRoutes(knex));
+app.use("/api/orders", ordersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
   res.render("index");
@@ -67,40 +70,34 @@ app.post("/login", (req, res) => {
   }
 })
 
-app.get("/:restaurant", (req, res) => {
-  //let templateVars = {email: req.session["user"], message: req.flash('loginMessage')}
-  res.render("menu");
-  //res.render("menu" , templateVars) ;
-});
 
 app.get("/register", (req, res) => {
-  let templateVars = {userInfo: req.params.id,
-    email: req.session["email"], 
-    message: req.flash('loginMessage')};
-  res.render("/registration", templateVars);
+  res.render("registration" );
 });
 
 app.post("/register", (req, res) => {
-  let i = 0;
-  for (let user in users) {
-    if(users[user].email === req.body.email) {i = 1;}
-  }
-  if(i === 0) {
-    let userInfo = usersdata();
-    let userDataObj = {'id': 1, 'email': req.body.email,
-      'password': bcrypt.hashSync(req.body.password, 10) };
-      users[userInfo] = userDataObj;
-      let templateVars = {userInfo: userDataObj,
-        email: req.session["email"], 
-        message: req.flash('loginMessage')};
-        console.log(users);
-        res.redirect('/menu');     //should this redirect to cart?
-      } else {
-        res.status(403);
-        req.flash('loginMessage', 'Email already registered!');
-        res.redirect('/register');
-      }
-});
+ debugger;
+ if(!checkIfUsernameExists(req.body.name)){
+  knex('users')
+  .insert({
+   'name':req.body.name,
+   'email':req.body.email,
+   'phoneNumber':req.body.phoneNumber,
+   'address': req.body.address,
+   'password':bcrypt.hashSync(req.body.password, 10),
+   'glutenFree':true,
+   'dairyFree':true,
+   'vegetarian':true,
+   'vegan':true,
+   'allergies': true,
+ })
+}else{
+  //res.flash('be more creative in your username loser')
+  console.log('sometime she dont')
+}
+             //should this redirect to cart?
+
+           });
 
 
 app.get("/login", (req, res) => {
@@ -125,12 +122,27 @@ app.listen(PORT, () => {
 
 //gets the users password from the usernaem they entered and compares the entered password to the hash
 function getUserPasswordHashandCompare(user,password){
-  let i=0;
-  dbHash = knex.select(password).form('users').where('name', user )
-  if(dbHash){
-    if(bcrypt.compareSync(password,dbHash)){
-      i = 1;
-    }
+
+  dbHash = knex
+  .select('password')
+  .from('users')
+  .where('name', user )
+  .then(user=> users[0].password)
+  if(dbHash && bcrypt.compareSync(password,dbHash)){
+    return true
   }
-  return i;
+  return false;
+}
+
+function checkIfUsernameExists(name){
+  console.log('made it to check');
+  if(knex
+    .select('name')
+    .from('users')
+    .where('name', name)
+    .then(result=>name[0].name)){
+    console.log(name);
+  return true;
+}
+return false;
 }
