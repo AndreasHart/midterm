@@ -24,87 +24,85 @@ $(document).ready(function () {
 
 // }
 
-	var resName;
-	var resdescription;
+var resName;
+var resdescription;
 
-	var createRestElem = (loadRestaurants) => {
-		var $restaurant = `<article class="lunch-article">
-			<section class="col-xs-12">
-			<h3>${resName}</h3>
-			</section>
-			<article class="lunch-food-description">
-			<h4>${resdescription}</h4>
-			<h5><span class="input-group-addon">
-        <input type="checkbox" aria-label="...">
-      </span>${menuItem}<h5>
-			</article>
-		</article>`;
-		return $restaurant;
-		console.log(loadRestaurants, "So many foods")
-	}
+var createRestElem = (loadRestaurants) => {
+  var $restaurant = `<article class=${resId}>
+  <section class="col-xs-12">
+  <h3>${resName}</h3>
+  </section>
+  <article class="lunch-food-description">
+  <h4>${resdescription}</h4>
+  </article>
+  </article>`;
+  return $restaurant;
+  console.log(loadRestaurants, "So many foods")
+}
 
-	function renderRestaurants (restList) {
-		$('.restaurantList').empty();
+function renderRestaurants (restList) {
+  $('.restaurantList').empty();
+		// var sortRestos = restList.sort(function (a, b) {
+		// 	a.restaurantId < b.restaurantId;
+		// });
+		// sortRestos.forEach(function (resto) {
 			for(res of restList) {
-				resName = res.restaurant_name;
-				resdescription = res.description;
-				menuItem = res.menuItemId;
-			$('.restaurantList').append(createRestElem(resName, resdescription));
-		}
-	}
-
-	var loadRestaurants = function ($inputResto) {
-		$.ajax({
-			url: '/api/restaurants/',
-			dataType: "json",
-			success: function(result) {
-				renderRestaurants(result);
-			}, failure: function() {
-				throw err
-				console.log("Restaurants melted", err)
-			}
-		});
-	}
-
-	loadRestaurants();
-
-	var menuItem;
-	var orderArray = [];
-
-	var createOrderArray = function () {
-		$('.menuItem').on("click", function () {
-			orderArray.push(menuItem);
-		})
-	}
-
-		$('.col-xs-12').mouseenter(function () {
-		$(this).css("background-color", "darkseagreen");
-	});
-
-	$('.col-xs-12').mouseleave(function () {
-		$(this).css("background-color", "lightseagreen");
-	});
-
-	$('h4').hide();
-	$('.lunch').mouseenter(function () {
-		$('h4').slideToggle();
-	});
-
-	$('.lunch-article').mouseleave(function () {
-		$('h4').hide();
-	});
-
-	function modify_qty(val) {
-    var qty = document.getElementById('qty').value;
-    var new_qty = parseInt(qty,10) + val;
-    
-    if (new_qty < 0) {
-        new_qty = 0;
+        resId=res.id;
+        resName = res.restaurant_name;
+        resdescription = res.description;
+        $('.restaurantList').append(createRestElem(resName, resdescription));
+      }
     }
-    
-    document.getElementById('qty').value = new_qty;
-    return new_qty;
-	}
+
+    var loadRestaurants = function ($inputResto) {
+      $.ajax({
+       url: '/api/restaurants/',
+       dataType: "json",
+       success: (result)=> {
+        renderRestaurants(result);
+
+      }, failure: ()=> {
+        throw err
+        console.log("Restaurants melted", err)
+      }
+    });
+
+    }
+
+    loadRestaurants();
+
+    $('col-xs-12').click(()=>{
+      $.ajax({
+       url: '/api/restaurants/:resid/menuitems',
+       dataType: "json",
+       success: (result)=> {
+        renderMenuitems(result);
+
+      }, failure: ()=> {
+        throw err
+        console.log("Restaurants melted", err)
+      }
+    });
+
+    });
+
+    // $('.col-xs-12').mouseenter(function () {
+    //   $(this).css("background-color", "darkseagreen");
+    // });
+
+    // $('.col-xs-12').mouseleave(function () {
+    //   $(this).css("background-color", "lightseagreen");
+    // });
+
+    $('h4').hide();
+    $('.lunch').mouseenter(function () {
+      $('h4').slideToggle();
+    });
+
+    $('.lunch-article').mouseleave(function () {
+      $('h4').hide();
+    });
+
 
 	// $(() => {
 	//   $.ajax({
@@ -118,6 +116,6 @@ $(document).ready(function () {
 
 	// });
 
-	//App should be able to populate 
+	//App should be able to populate
 
 });
