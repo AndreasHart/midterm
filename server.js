@@ -8,15 +8,16 @@ const express     = require("express");
 const bodyParser  = require("body-parser");
 const sass        = require("node-sass-middleware");
 const app         = express();
-
+const bcrypt      = require('bcrypt');
 const knexConfig  = require("./knexfile");
 const knex        = require("knex")(knexConfig[ENV]);
 const morgan      = require('morgan');
 const knexLogger  = require('knex-logger');
-
+const uuid        = require('node-uuid')
+const flash       = require('connect-flash')
 // Seperated Routes for each Resource
 const restaurantRoutes = require("./routes/restaurants");
-const registerRoutes = require("./routes/register");
+const usersRoutes = require("./routes/users");
 const ordersRoutes = require ("./routes/orders");
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -39,7 +40,7 @@ app.use(express.static("public"));
 // Mount all resource routes
 
 app.use("/api/restaurants", restaurantRoutes(knex));
-//app.use("/api/register",registerRoutes(knex));
+app.use("/api/users",usersRoutes(knex));
 app.use("/api/orders", ordersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
@@ -76,28 +77,36 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
- debugger;
- if(!checkIfUsernameExists(req.body.name)){
-  knex('users')
-  .insert({
-   'name':req.body.name,
-   'email':req.body.email,
-   'phoneNumber':req.body.phoneNumber,
-   'address': req.body.address,
-   'password':bcrypt.hashSync(req.body.password, 10),
-   'glutenFree':true,
-   'dairyFree':true,
-   'vegetarian':true,
-   'vegan':true,
-   'allergies': true,
- })
-}else{
-  //res.flash('be more creative in your username loser')
-  console.log('sometime she dont')
-}
-             //should this redirect to cart?
+  return checkIfUsernameExists(req.body.name)
+  .then(value => {
+    //true or false
+    console.log(req.body.password)
+    if(req.body.password){
+      console.log('inside')
+      if(!value) {
+        return knex('users')
+        .insert({
+          'id':uuid.v4(),
+          'name':req.body.name,
+          'email':req.body.email,
+          'phoneNumber':req.body.phoneNumber,
+          'address': req.body.address,
+          'password':bcrypt.hashSync(req.body.password, 10),
+          'glutenFree':true,
+          'dairyFree':true,
+          'vegetarian':true,
+          'vegan':true,
+          'allergies': true,
+        })
+        console.log('you made a user');
+        return res.redirect('login')
+      } else {
+        return console.log('be more creative in your username/password')
+      }
+    }
+  })
+});
 
-           });
 
 
 app.get("/login", (req, res) => {
@@ -127,7 +136,7 @@ function getUserPasswordHashandCompare(user,password){
   .select('password')
   .from('users')
   .where('name', user )
-  .then(user=> users[0].password)
+  .then(user => users[0].password)
   if(dbHash && bcrypt.compareSync(password,dbHash)){
     return true
   }
@@ -135,14 +144,18 @@ function getUserPasswordHashandCompare(user,password){
 }
 
 function checkIfUsernameExists(name){
-  console.log('made it to check');
-  if(knex
-    .select('name')
-    .from('users')
-    .where('name', name)
-    .then(result=>name[0].name)){
-    console.log(name);
-  return true;
-}
-return false;
+
+  return knex
+  .select('name')
+  .from('users')
+  .where('name', name)
+  .then((users)=>{
+
+    if(users.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  })
+
 }
