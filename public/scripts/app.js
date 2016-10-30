@@ -117,4 +117,6 @@ function renderRestaurants (restList) {
     if (new_qty < 0) {
         new_qty = 0;
 
-}
+		}
+	}
+});
