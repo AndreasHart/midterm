@@ -22,7 +22,7 @@ $(document).ready(function () {
 $(() => {
   $.ajax({
     method: "GET",
-    url: "/api/restaurant"
+    url: "/api/restaurants"
   }).done((restaurants) => {
     console.log(restaurants);
     for(res of restaurants) {
@@ -31,7 +31,7 @@ $(() => {
   });
   $.ajax({
     method: "GET",
-    url: "/api/restaurant/:resId"
+    url: "/api/restaurants/:resId"
   }).done((menu) => {
     console.log(restaurants);
     for(item of menu) {

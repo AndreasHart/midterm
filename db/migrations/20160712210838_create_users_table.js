@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
       table.string('email');
       table.string('name');
       table.string('phoneNumber');
+      table.string('password')
       table.string('address');
       table.boolean('glutenFree');
       table.boolean('dairyFree');
@@ -52,7 +53,7 @@ exports.up = function(knex, Promise) {
       table.string('description');
     }),
 
-  ])
+    ])
 };
 
 exports.down = function(knex, Promise) {

@@ -1,0 +1,141 @@
+CREATE TABLE famous_people (
+  id BIGSERIAL PRIMARY KEY,
+  first_name VARCHAR(50),
+  last_name VARCHAR(50),
+  birthdate DATE
+);
+INSERT INTO famous_people (first_name, last_name, birthdate)
+  VALUES ('Abraham', 'Lincoln', '1809-02-12');
+INSERT INTO famous_people (first_name, last_name, birthdate)
+  VALUES ('Mahatma', 'Gandhi', '1869-10-02');
+INSERT INTO famous_people (first_name, last_name, birthdate)
+  VALUES ('Paul', 'Rudd', '1969-04-06');
+SELECT * FROM famous_people;
+SELECT * FROM famous_people WHERE birthday>= '1920-01-01';
+SELECT * FROM famous_people WHERE birthdate>= '1920-01-01';
+SELECT * FROM famous_people WHERE birthdate<= '1920-01-01';
+>q
+/q
+\q
+CREATE ROLE labber WITH LOGIN 'labber'
+CREATE ROLE labber WITH LOGIN password 'labber';
+CREATE ROLE labber WITH LOGIN 'labber'
+CREATE ROLE labber WITH LOGIN password 'labber'
+CREATE ROLE labber WITH LOGIN password 'labber';
+\q
+CREATE ROLE labber WITH LOGIN password 'labber';
+CREATE DATABASE midterm OWNER labber;
+\q
+\q
+\q
+SELECT name
+show tables;
+SHOW tables;
+SHOW TABLES;
+\dt
+\q
+\dt
+\dt
+\dt
+\q
+logs
+SELECT table_schema,table_name
+FROM information_schema.tables
+ORDER BY table_schema,table_name;
+SELECT table_schema,table_name
+FROM information_schema.tables
+ORDER BY table_schema,table_name;
+\dn
+\dt
+\d
+\
+\?
+\? commands
+/? [commands]
+\? [commands]
+/d+ famous_people
+\d+ famous_people
+\q
+\q
+\dt
+\q
+\dt
+\q
+\q
+\q
+\q
+\q
+\d milestones
+\q
+\dt
+\d migratins
+\d migrations
+\d milestones
+\q
+\d milestones
+\q
+\d milestones
+\q
+\d milestones
+\d
+\d famous_people
+\q
+\d milestones
+\q
+\d
+\q
+\d
+\dt
+\q
+\d
+\q
+\d
+\q
+\q
+\d
+\dt orders
+\q
+\dt
+\q
+\d users
+\d orders
+\q
+\d orders
+\q
+\d
+\d
+\\d
+\d
+\q
+\d
+\q\q
+\d
+\dt order_items
+\dt order_item
+\d order_item
+\q
+\d
+\d orders
+q\q
+\d
+\d order_item
+\q
+\dt
+\d
+\q
+\d
+\dt restaurants
+\d restaurants
+\q
+\d
+\d
+\q
+\d
+\dt restaurants\q
+\dt users
+\d users
+\q
+\dt
+\dt users
+users
+\s users
