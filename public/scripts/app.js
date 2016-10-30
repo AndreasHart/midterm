@@ -39,6 +39,18 @@ var createRestElem = (loadRestaurants) => {
   return $restaurant;
   console.log(loadRestaurants, "So many foods")
 }
+var createMenuElem = (loadMenuItems) => {
+  var $menu = `<article class=${menuId}>
+  <section class="item">
+  <h3>${MenuItem}</h3>
+  </section>
+  <article class="lunch-food-description">
+  <h4>${Menudescription}</h4>
+  </article>
+  </article>`;
+  return $menu;
+  console.log(load, "So many foods")
+}
 
 function renderRestaurants (restList) {
   $('.restaurantList').empty();
@@ -53,14 +65,14 @@ function renderRestaurants (restList) {
         $('.restaurantList').append(createRestElem(resName, resdescription));
       }
     }
-    function renderMenu (menuList) {
+    function renderMenuitems (menuList) {
 
 
       for(item of menuList) {
         itemId=item.id;
         menuItem = item.dishName;
         ItemDescription = item.description;
-        $(.).append(createRestElem(resName, resdescription));
+        $(.${itemId}).append(createMenuElem(MenuName, Itemdescription));
       }
     }
 
@@ -81,20 +93,20 @@ function renderRestaurants (restList) {
 
     loadRestaurants();
 
-    $('col-xs-12').click(()=>{
-      $.ajax({
-       url: '/api/restaurants/:resid/menuitems',
-       dataType: "json",
-       success: (result)=> {
-        renderMenuitems(result);
+    $('c3098998-5f8e-4947-967f-cb83bc8391be').click((resid)=>{
+      // $.ajax({
+      //   url: '/api/restaurants/${this}/menuitems',
+      //   dataType: "json",
+      //   success: (result)=> {
+      //     renderMenuitems(result);
 
-      }, failure: ()=> {
-        throw err
-        console.log("Restaurants melted", err)
-      }
-    });
+      //   }, failure: ()=> {
+      //     throw err
+          console.log("Restaurants melted", err)
+        }
+    //   });
 
-    });
+    // });
 
     // $('.col-xs-12').mouseenter(function () {
     //   $(this).css("background-color", "darkseagreen");
