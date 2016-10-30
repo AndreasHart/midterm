@@ -48,7 +48,7 @@ app.use("/api/users",usersRoutes(knex));
 app.use("/api/orders", ordersRoutes(knex));
 // Home page
 app.get("/", (req, res) => {
-
+  console.log(req.session.user);
   if(req.session.user){
     res.render("index");
   }else{
@@ -102,9 +102,11 @@ app.post("/register", (req, res) => {
           'vegetarian':true,
           'vegan':true,
           'allergies': true,
+        }).then(()=>{
+          console.log('you made a user');
+          return res.redirect('login')
         })
-        console.log('you made a user');
-        return res.redirect('login')
+
       } else {
         return console.log('be more creative in your username/password')
       }
@@ -142,7 +144,7 @@ function getUserPasswordHashandCompare(user,password){
   .from('users')
   .where('name', user )
   .then((users) => {
-    if(bcrypt.compareSync(password,users[0].password)){
+    if(bcrypt.compareSync(password, users[0].password)){
       return true
     }
     return false;
