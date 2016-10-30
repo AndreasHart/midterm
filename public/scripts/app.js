@@ -48,14 +48,14 @@ function renderRestaurants (restList) {
         $('.restaurantList').append(createRestElem(resName, resdescription));
       }
     }
+    
     function renderMenu (menuList) {
-
-
+    	$('h5').empty();
       for(item of menuList) {
         itemId=item.id;
         menuItem = item.dishName;
         ItemDescription = item.description;
-        $(.).append(createRestElem(resName, resdescription));
+        $('h5').append(createRestElem(resName, resdescription));
       }
     }
 
