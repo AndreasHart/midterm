@@ -2,23 +2,6 @@
 
 $(document).ready(function () {
 
-	$('.col-xs-12').mouseenter(function () {
-		$(this).css("background-color", "darkseagreen");
-	});
-
-	$('.col-xs-12').mouseleave(function () {
-		$(this).css("background-color", "lightseagreen");
-	});
-
-	$('.lunch-food-description').hide();
-	$('.lunch').mouseenter(function () {
-		$('.lunch-food-description').slideToggle();
-	});
-
-	$('.lunch-article').mouseleave(function () {
-		$('.lunch-food-description').hide();
-	});
-
 // $(() => {
 //   $.ajax({
 //     method: "GET",
@@ -41,22 +24,33 @@ $(document).ready(function () {
 
 // }
 
+	var resName;
+	var resdescription;
+
 	var createRestElem = (loadRestaurants) => {
-		var $restaurant = `<article>
-			<h3>${loadRestaurants.restaurant.name}</h3>
-			<h4>${loadRestaurants.restaurant.menuitems}</h4>
+		var $restaurant = `<article class="lunch-article">
+			<section class="col-xs-12">
+			<h3>${resName}</h3>
+			</section>
+			<article class="lunch-food-description">
+			<h4>${resdescription}</h4>
+			</article>
 		</article>`;
 		return $restaurant;
+		console.log(loadRestaurants, "So many foods")
 	}
 
 	function renderRestaurants (restList) {
 		$('.restaurantList').empty();
-		var sortRestos = restList.sort(function (a, b) {
-			a.restaurantId < b.restaurantId;
-		});
-		sortRestos.forEach(function (resto) {
-			$('.restaurantList').append(createRestElem(resto));
-		});
+		// var sortRestos = restList.sort(function (a, b) {
+		// 	a.restaurantId < b.restaurantId;
+		// });
+		// sortRestos.forEach(function (resto) {
+			for(res of restList) {
+				resName = res.restaurant_name;
+				resdescription = res.description;
+			$('.restaurantList').append(createRestElem(resName, resdescription));
+		}
 	}
 
 	var loadRestaurants = function ($inputResto) {
@@ -73,6 +67,23 @@ $(document).ready(function () {
 	}
 
 	loadRestaurants();
+
+		$('.col-xs-12').mouseenter(function () {
+		$(this).css("background-color", "darkseagreen");
+	});
+
+	$('.col-xs-12').mouseleave(function () {
+		$(this).css("background-color", "lightseagreen");
+	});
+
+	$('h4').hide();
+	$('.lunch').mouseenter(function () {
+		$('h4').slideToggle();
+	});
+
+	$('.lunch-article').mouseleave(function () {
+		$('h4').hide();
+	});
 
 
 	// $(() => {
