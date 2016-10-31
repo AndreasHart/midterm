@@ -91,7 +91,7 @@ function renderRestaurants (restList) {
       $('h4').hide();
     });
 
-    	var menuItem;
+    	var menuItemId;
 	var orderArray = [];
 
 	var createOrderArray = function () {
@@ -102,14 +102,6 @@ function renderRestaurants (restList) {
 			order.Array.push(menuItem);
 		})
 	}
-
-	$('.col-xs-12').mouseenter(function () {
-	$(this).css("background-color", "darkseagreen");
-	});
-
-	$('.col-xs-12').mouseleave(function () {
-		$(this).css("background-color", "lightseagreen");
-	});
 
 	$('.lunch-food-description').hide();
 	$('.lunch').mouseenter(function () {
