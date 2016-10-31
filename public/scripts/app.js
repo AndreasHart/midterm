@@ -4,6 +4,7 @@ $(document).ready(function () {
 
 	var resName;
 	var resdescription;
+	var menuItem;
 
 	var createRestElem = (loadRestaurants) => {
 		var $restaurant = `<article class="lunch-article">
@@ -17,7 +18,9 @@ $(document).ready(function () {
         <input id="qty-menu" value="0" />
         <button id="down" onclick="modify_qty(-1)">-1</button>
         <button id="up" onclick="modify_qty(1)">+1</button>
-    </div></h5>
+    </div>
+    		<button type="submit">Add</button>
+        <button type="submit">Remove</button></h5>
 			</article>
 		</article>`;
 		return $restaurant;
@@ -99,7 +102,7 @@ function renderRestaurants (restList) {
 			orderArray.push(menuItem);
 		})
 		$('.itemSubmit').on("click", function () {
-			order.Array.push(menuItem);
+			orderArray.push(menuItem);
 		})
 	}
 
@@ -121,4 +124,21 @@ function renderRestaurants (restList) {
 
 		}
 	}
+
+	// $('submit').on("click", function () {
+
+	// });
+
+	// $('remove').on("click", function () {
+
+	// });
+
+	// $('#down').on("click", function () {
+	// 	orderArray.splice("menuItemId");
+	// });
+
+	// $('#up').on("click", function () {
+	// 	orderArray.push("menuItemId");
+	// });
+
 });
