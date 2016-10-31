@@ -13,15 +13,6 @@ $(document).ready(function () {
 			</section>
 			<article class="lunch-food-description">
 			<h4>${resdescription}</h4>
-			<h5>${menuItem}<div class="menu-box">    
-        <label for="qty"><abbr title="Quantity">Qty</abbr></label>
-        <input id="qty-menu" value="0" />
-        <button id="down" onclick="modify_qty(-1)">-1</button>
-        <button id="up" onclick="modify_qty(1)">+1</button>
-    </div>
-    		<button type="submit">Add</button>
-        <button type="submit">Remove</button></h5>
-			</article>
 		</article>`;
 		return $restaurant;
 		console.log(loadRestaurants, "So many foods")
@@ -52,8 +43,9 @@ function renderRestaurants (restList) {
     $('.restaurantList').append(createRestElem(resName, resdescription));
   }
 }
+
 function renderMenuItems (restList) {
-  $('.restaurantList').empty();
+  $('.menuList').empty();
   for(res of restList) {
     resId=res.id;
     resName = res.dishName;
@@ -61,10 +53,10 @@ function renderMenuItems (restList) {
     $('.menuList').append(createRestElem(resName, resdescription));
   }
 }
+	
 	function loadMenuitems (restList) {
 
-
-  for(item of RestList) {
+  for(item of restList) {
     itemId=item.id;
     $.ajax({
       url: '/api/restaurants/${itemId}/menuitems',
@@ -80,7 +72,22 @@ function renderMenuItems (restList) {
     }
     menuItem = item.dishName;
     ItemDescription = item.description;
-    $('.h5' ).append(createMenuElem(MenuName, Itemdescription));
+    $('.menuList' ).append(createMenuElem(menuItem, ItemDescription));
+  }
+
+  var createMenuElem = function (loadMenuitems) {
+  	var $menu = `<section class="menuList"><h5>${menuItem}${ItemDescription}<div class="menu-box">    
+        <label for="qty"><abbr title="Quantity">Qty</abbr></label>
+        <input id="qty-menu" value="0" />
+        <button id="down" onclick="modify_qty(-1)">-1</button>
+        <button id="up" onclick="modify_qty(1)">+1</button>
+    </div>
+    		<button type="submit">Add</button>
+        <button type="submit">Remove</button></h5>
+        </section>
+			</article>`
+			return $menu
+			console.log($menu, "There are items, alright.")
   }
 
     // $('.col-xs-12').mouseenter(function () {
