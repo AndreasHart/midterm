@@ -1,0 +1,15 @@
+body {
+  background: #efefef;
+  padding: 10px;
+  font-family: 'Varela Round';
+  background-image: url("https://image.freepik.com/free-photo/white-background--food--candy--dessert_394557.jpg");
+}
+/*=== 2. Anchor Link ===*/
+a {
+  color: #aaaaaa;
+  transition: all ease-in-out 200ms;
+}
+a:hover {
+  color: #333333;
+  text-decoration: none;
+}

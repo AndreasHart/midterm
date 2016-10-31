@@ -12,11 +12,16 @@ $(document).ready(function () {
 			<h3>${resName}</h3>
 			</section>
 			<article class="lunch-food-description">
-			<h4>${resdescription}</h4>
+			<p><h4>${resdescription}</h4></p>
+		</article>
 		</article>`;
 		return $restaurant;
 		console.log(loadRestaurants, "So many foods")
 	}
+
+	$('.col-xs-12').on("click", () => {
+  $('p').css("display", "inline").slideToggle();
+		});
 
 	var loadRestaurants = function ($inputResto) {
 		$.ajax({
@@ -24,6 +29,7 @@ $(document).ready(function () {
 			dataType: "json",
 			success: function(result) {
 				renderRestaurants(result);
+				loadMenuItems(result);
 			}, failure: function() {
 				throw err
 				console.log("Restaurants melted", err)
@@ -54,15 +60,15 @@ function renderMenuItems (restList) {
   }
 }
 	
-	function loadMenuitems (restList) {
+	function loadMenuItems (restList) {
 
   for(item of restList) {
     itemId=item.id;
     $.ajax({
-      url: '/api/restaurants/${itemId}/menuitems',
+      url: `/api/restaurants/${itemId}/menuitems`,
       dataType: "json",
       success: (result)=> {
-        renderMenuitems(result)
+        renderMenuItems(result)
       }, failure: ()=> {
         throw err
         console.log("Restaurants melted", err)
@@ -75,7 +81,7 @@ function renderMenuItems (restList) {
     $('.menuList' ).append(createMenuElem(menuItem, ItemDescription));
   }
 
-  var createMenuElem = function (loadMenuitems) {
+  var createMenuElem = function (loadMenuItems) {
   	var $menu = `<section class="menuList"><h5>${menuItem}${ItemDescription}<div class="menu-box">    
         <label for="qty"><abbr title="Quantity">Qty</abbr></label>
         <input id="qty-menu" value="0" />
@@ -155,25 +161,6 @@ function renderMenuItems (restList) {
 	// });
 
 
-var loadRestaurants = function ($inputResto) {
-  $.ajax({
-   url: '/api/restaurants/',
-   dataType: "json",
-   success: (result)=> {
-    renderRestaurants(result);
-    loadMenuitems(result)
-  }, failure: ()=> {
-    throw err
-    console.log("Restaurants melted", err)
-  }
-});
-
-}
-
-loadRestaurants();
-
-
-
 $('h4').hide();
 $('.lunch').mouseenter(function () {
   $('h4').slideToggle();
@@ -195,14 +182,11 @@ var createOrderArray = function () {
  })
 }
 
-$('.lunch-food-description').hide();
-$('.lunch').mouseenter(function () {
-  $('.lunch-food-description').slideToggle();
-});
 
-$('.lunch-article').mouseleave(function () {
-  $('.lunch-food-description').hide();
-});
+
+// $('.lunch-article').mouseleave(function () {
+//   $('.lunch-food-description').hide();
+// });
 
 function modify_qty(val) {
   var qty = document.getElementById('qty').value;

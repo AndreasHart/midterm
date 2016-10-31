@@ -35,6 +35,7 @@ module.exports = (knex) => {
   });
 
   router.get("/:resId/menuitems", (req, res) => {
+    console.log("Getting by", req.params.resId);
     knex
     .select("*")
     .from("menu_items")
